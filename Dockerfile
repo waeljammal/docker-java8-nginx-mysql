@@ -1,5 +1,5 @@
 FROM ubuntu:14.04
-MAINTAINER Guilherme Silveira "guilherme.silveira@alura.com.br"
+MAINTAINER Wael Jammal
 
 ### BASIC CONFIG
 
@@ -31,12 +31,6 @@ RUN apt-get install -qq -y tar unzip zip python-dateutil ant nginx git
 # more frequent version changes
 RUN apt-get install -qq -y oracle-java8-installer mysql-client nodejs
 
-### TOMCAT
-RUN wget -q -O - http://archive.apache.org/dist/tomcat/tomcat-8/v8.0.5/bin/apache-tomcat-8.0.5.tar.gz | tar zxf - -C /home/root/
-RUN ln -s /home/root/apache-tomcat-8.0.5 /home/root/tomcat
-RUN /bin/sed -i 's|<Connector port="8080" pro|<Connector port="8080" compression="on" compressionMinSize="2048" compressableMimeType="text/html,text/xml,text/css,application/javascript" noCompressionUserAgents="gozilla, traviata" pro|' /home/root/tomcat/conf/server.xml
-RUN rm -fr /home/root/tomcat/webapps/*
-
 ### NEWRELIC Server Monitoring
 
 RUN echo "deb http://apt.newrelic.com/debian/ newrelic non-free" >> /etc/apt/sources.list.d/newrelic.list
@@ -47,6 +41,4 @@ RUN apt-get -qq update
 RUN sudo apt-get install -qq -y mysql-server 2> /dev/null
 
 ### NGINX redir to tomcat
-COPY config/nginx-tomcat.conf /etc/nginx/sites-available/default
-
 COPY config/nginx.conf /etc/nginx/nginx.conf

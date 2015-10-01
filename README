@@ -32,11 +32,7 @@ service mysql start
 mkdir -p /home/root/tomcat/webapps/ROOT
 echo "Welcome to Tomcat" > /home/root/tomcat/webapps/ROOT/index.html 
 
-# Start tomcat
-/home/root/tomcat/bin/startup.sh
-
-# Test tomcat and nginx
-curl http://localhost:8080
+# Test nginx
 curl http://localhost
 
 # Build you own project
