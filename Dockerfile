@@ -6,7 +6,7 @@ MAINTAINER Wael Jammal
 RUN mkdir -p /mnt/logs
 RUN chmod 777 /mnt/logs
 RUN apt-get -q update
-RUN apt-get install -q -y software-properties-common wget curl
+RUN apt-get install -q -y software-properties-common wget curl git nano
 
 # NODEJS
 RUN curl -sL https://deb.nodesource.com/setup | sudo bash -
